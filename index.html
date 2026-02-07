@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Systems of Equations Test</title>
+    <title>Systems of Equations Test (30 Questions - All Solvable)</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -25,7 +25,7 @@
     <script type="text/babel">
         const { useState, useEffect, useRef } = React;
 
-        // --- ICONS (Inline SVGs to replace lucide-react dependency) ---
+        // --- ICONS ---
         const Calculator = ({ size = 24, className }) => (
             <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
                 <rect width="16" height="20" x="4" y="2" rx="2"/><line x1="8" x2="16" y1="6" y2="6"/><line x1="16" x2="16" y1="14" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/>
@@ -60,8 +60,6 @@
         /**
          * UTILITIES & PARSING
          */
-
-        // Parses input like "8/3", "2.5", "-5" into a float
         const parseNumber = (input) => {
             if (typeof input === 'number') return input;
             if (!input) return NaN;
@@ -73,13 +71,13 @@
             return parseFloat(str);
         };
 
-        // Checks if two values are close enough
         const isClose = (a, b, epsilon = 0.1) => Math.abs(a - b) < epsilon;
 
         /**
-         * DATA: QUESTIONS
+         * DATA: QUESTIONS (30 - No Infinite/No Solution cases)
          */
         const QUESTIONS = [
+            // --- ORIGINAL QUESTIONS (1-13) ---
             {
                 id: 1,
                 type: 'substitution',
@@ -89,14 +87,9 @@
                 inputs: [{ label: 'x', answer: 4 }, { label: 'y', answer: 10 }],
                 explanation: (
                     <div className="space-y-2">
-                        <p><strong>Step 1: Set equations equal to each other.</strong></p>
-                        <p>Since both equations equal y, we can write: <br />3x - 2 = x + 6</p>
-                        <p><strong>Step 2: Solve for x.</strong></p>
-                        <p>Subtract x from both sides: 2x - 2 = 6</p>
-                        <p>Add 2 to both sides: 2x = 8</p>
-                        <p>Divide by 2: x = 4</p>
-                        <p><strong>Step 3: Solve for y.</strong></p>
-                        <p>Substitute x=4 into the second equation: y = (4) + 6 = 10</p>
+                        <p><strong>Step 1: Set equations equal.</strong> 3x - 2 = x + 6</p>
+                        <p><strong>Step 2: Solve for x.</strong> 2x = 8 → x = 4</p>
+                        <p><strong>Step 3: Solve for y.</strong> y = 4 + 6 = 10</p>
                         <p className="font-bold text-green-700">Solution: (4, 10)</p>
                     </div>
                 )
@@ -110,36 +103,27 @@
                 inputs: [{ label: 'x', answer: 1 }, { label: 'y', answer: 3 }],
                 explanation: (
                     <div className="space-y-2">
-                        <p><strong>Step 1: Substitute the expression for y.</strong></p>
-                        <p>Substitute (-2x + 5) for y in the second equation:</p>
-                        <p>4x + (-2x + 5) = 7</p>
-                        <p><strong>Step 2: Solve for x.</strong></p>
-                        <p>Combine like terms: 2x + 5 = 7</p>
-                        <p>Subtract 5: 2x = 2</p>
-                        <p>Divide by 2: x = 1</p>
-                        <p><strong>Step 3: Solve for y.</strong></p>
-                        <p>Use the first equation: y = -2(1) + 5 = -2 + 5 = 3</p>
+                        <p><strong>Step 1: Substitute y.</strong> 4x + (-2x + 5) = 7</p>
+                        <p><strong>Step 2: Solve for x.</strong> 2x + 5 = 7 → 2x = 2 → x = 1</p>
+                        <p><strong>Step 3: Solve for y.</strong> y = -2(1) + 5 = 3</p>
                         <p className="font-bold text-green-700">Solution: (1, 3)</p>
                     </div>
                 )
             },
+            // CHANGED (Was No Solution)
             {
                 id: 3,
                 type: 'elimination',
                 title: 'Solving by Elimination',
                 instruction: 'Solve the system using elimination.',
-                equations: ['2x + 3y = 11', '2x + 3y = 1'],
-                inputs: [{ label: 'Solution type (enter "no" for no solution, "inf" for infinite, or solve for x/y)', answer: 'no', isText: true }],
+                equations: ['3x + 2y = 10', '3x - 2y = 2'],
+                inputs: [{ label: 'x', answer: 2 }, { label: 'y', answer: 2 }],
                 explanation: (
                     <div className="space-y-2">
-                        <p><strong>Step 1: Eliminate a variable.</strong></p>
-                        <p>Subtract the second equation from the first:</p>
-                        <p>(2x + 3y) - (2x + 3y) = 11 - 1</p>
-                        <p>0 = 10</p>
-                        <p><strong>Step 2: Interpret the result.</strong></p>
-                        <p>This statement is <strong>FALSE</strong>.</p>
-                        <p>This indicates the lines are parallel and never intersect.</p>
-                        <p className="font-bold text-green-700">Solution: No Solution</p>
+                        <p>Add equations: (3x+3x) + (2y-2y) = 10+2</p>
+                        <p>6x = 12 → x = 2</p>
+                        <p>Substitute x=2: 3(2) + 2y = 10 → 6 + 2y = 10 → 2y = 4 → y = 2</p>
+                        <p className="font-bold text-green-700">Solution: (2, 2)</p>
                     </div>
                 )
             },
@@ -147,21 +131,14 @@
                 id: 4,
                 type: 'elimination',
                 title: 'Solving by Elimination',
-                instruction: 'Solve the system using elimination. (Fractions allowed, e.g., 8/3)',
+                instruction: 'Solve using elimination. (Fractions allowed)',
                 equations: ['4x - y = 9', '2x + y = 7'],
                 inputs: [{ label: 'x', answer: 8/3 }, { label: 'y', answer: 5/3 }],
                 explanation: (
                     <div className="space-y-2">
-                        <p><strong>Step 1: Add the equations.</strong></p>
-                        <p>The y terms (-y, +y) are opposites, so add equations:</p>
-                        <p>(4x - y) + (2x + y) = 9 + 7</p>
-                        <p>6x = 16</p>
-                        <p><strong>Step 2: Solve for x.</strong></p>
-                        <p>x = 16/6 = 8/3 (approx 2.67)</p>
-                        <p><strong>Step 3: Solve for y.</strong></p>
-                        <p>Substitute x=8/3 into 2x + y = 7:</p>
-                        <p>2(8/3) + y = 7 → 16/3 + y = 7</p>
-                        <p>y = 7 - 16/3 = 21/3 - 16/3 = 5/3 (approx 1.67)</p>
+                        <p>Add equations: 6x = 16 → x = 16/6 = 8/3</p>
+                        <p>Substitute x: 2(8/3) + y = 7 → 16/3 + y = 21/3</p>
+                        <p>y = 5/3</p>
                         <p className="font-bold text-green-700">Solution: (8/3, 5/3)</p>
                     </div>
                 )
@@ -170,176 +147,392 @@
                 id: 5,
                 type: 'graphing',
                 title: 'Solving by Graphing',
-                instruction: 'Graph both lines to find the solution. Click the grid to plot 2 points for Line 1, then 2 points for Line 2.',
+                instruction: 'Graph both lines.',
                 equations: ['y = x - 1', 'y = -2x + 5'],
-                targetLines: [
-                    { m: 1, b: -1 },
-                    { m: -2, b: 5 }
-                ],
+                targetLines: [{ m: 1, b: -1 }, { m: -2, b: 5 }],
                 explanation: (
                     <div className="space-y-2">
-                        <p><strong>Line 1: y = x - 1</strong></p>
-                        <p>Slope = 1, Y-intercept = -1. Start at (0, -1), go up 1, right 1.</p>
-                        <p><strong>Line 2: y = -2x + 5</strong></p>
-                        <p>Slope = -2, Y-intercept = 5. Start at (0, 5), go down 2, right 1.</p>
-                        <p><strong>Intersection:</strong></p>
-                        <p>The lines cross at exactly <strong>(2, 1)</strong>.</p>
+                        <p>Line 1: Start at -1, Slope 1.</p>
+                        <p>Line 2: Start at 5, Slope -2.</p>
+                        <p>Intersection: (2, 1)</p>
                     </div>
                 )
             },
+            // CHANGED (Was No Solution)
             {
                 id: 6,
                 type: 'graphing',
                 title: 'Solving by Graphing',
-                instruction: 'Graph both lines. (Hint: Rewrite standard form to slope-intercept if needed).',
-                equations: ['y = 2x + 4', '2x - y = 3'],
-                targetLines: [
-                    { m: 2, b: 4 },
-                    { m: 2, b: -3 } // 2x - y = 3 => -y = -2x + 3 => y = 2x - 3
-                ],
+                instruction: 'Graph both lines.',
+                equations: ['y = x + 2', 'y = -x + 4'],
+                targetLines: [{ m: 1, b: 2 }, { m: -1, b: 4 }],
                 explanation: (
                     <div className="space-y-2">
-                        <p><strong>Line 1: y = 2x + 4</strong></p>
-                        <p>Slope = 2, Y-intercept = 4.</p>
-                        <p><strong>Line 2: 2x - y = 3</strong></p>
-                        <p>Rewrite: -y = -2x + 3 → y = 2x - 3.</p>
-                        <p>Slope = 2, Y-intercept = -3.</p>
-                        <p><strong>Analysis:</strong></p>
-                        <p>The slopes are equal (m=2), but intercepts are different (4 vs -3). The lines are parallel.</p>
-                        <p className="font-bold text-green-700">Solution: No Solution</p>
+                        <p>Line 1: Start at 2, slope 1 (Up 1, Right 1).</p>
+                        <p>Line 2: Start at 4, slope -1 (Down 1, Right 1).</p>
+                        <p>Intersect at (1, 3).</p>
+                        <p className="font-bold text-green-700">Solution: (1, 3)</p>
                     </div>
                 )
             },
             {
                 id: 7,
                 type: 'mixed',
-                title: 'Choosing a Method (Elimination)',
-                instruction: 'Solve using Elimination (as requested).',
+                title: 'Elimination Method',
+                instruction: 'Solve using Elimination.',
                 equations: ['3x + 2y = 12', '6x - 2y = 8'],
                 inputs: [{ label: 'x', answer: 20/9 }, { label: 'y', answer: 8/3 }],
                 explanation: (
                     <div className="space-y-2">
-                        <p><strong>Step 1: Add equations.</strong></p>
-                        <p>The 2y terms cancel out.</p>
-                        <p>(3x + 2y) + (6x - 2y) = 12 + 8</p>
-                        <p>9x = 20 → x = 20/9</p>
-                        <p><strong>Step 2: Solve for y.</strong></p>
-                        <p>Substitute x=20/9 into 3x+2y=12:</p>
-                        <p>3(20/9) + 2y = 12 → 20/3 + 2y = 36/3</p>
+                        <p>Add equations: 9x = 20 → x = 20/9</p>
+                        <p>Substitute: 3(20/9) + 2y = 12 → 20/3 + 2y = 36/3</p>
                         <p>2y = 16/3 → y = 8/3</p>
-                        <p className="font-bold text-green-700">Solution: (20/9, 8/3)</p>
                     </div>
                 )
             },
             {
                 id: 8,
                 type: 'mixed',
-                title: 'Choosing a Method (Substitution)',
-                instruction: 'Solve using Substitution (as requested).',
+                title: 'Substitution Method',
+                instruction: 'Solve using Substitution.',
                 equations: ['y = -x + 7', '2x + y = 9'],
                 inputs: [{ label: 'x', answer: 2 }, { label: 'y', answer: 5 }],
                 explanation: (
                     <div className="space-y-2">
-                        <p><strong>Step 1: Substitute.</strong></p>
-                        <p>Replace y in eq 2: 2x + (-x + 7) = 9</p>
+                        <p>Sub y: 2x + (-x + 7) = 9</p>
                         <p>x + 7 = 9 → x = 2</p>
-                        <p><strong>Step 2: Solve for y.</strong></p>
                         <p>y = -2 + 7 = 5</p>
-                        <p className="font-bold text-green-700">Solution: (2, 5)</p>
                     </div>
                 )
             },
             {
                 id: 9,
                 type: 'word',
-                title: 'Word Problem: Theater Tickets',
-                instruction: 'Adult tickets $12, Student $8. 95 tickets sold. Total $940. How many of each?',
-                inputs: [{ label: 'Adult Tickets', answer: 45 }, { label: 'Student Tickets', answer: 50 }],
+                title: 'Theater Tickets',
+                instruction: 'Adult $12, Student $8. 95 sold, $940 total.',
+                inputs: [{ label: 'Adult', answer: 45 }, { label: 'Student', answer: 50 }],
                 explanation: (
                     <div className="space-y-2">
-                        <p><strong>Equations:</strong></p>
-                        <p>1) a + s = 95 → s = 95 - a</p>
-                        <p>2) 12a + 8s = 940</p>
-                        <p><strong>Solve:</strong></p>
-                        <p>12a + 8(95 - a) = 940</p>
-                        <p>12a + 760 - 8a = 940</p>
-                        <p>4a = 180 → a = 45</p>
-                        <p>s = 95 - 45 = 50</p>
+                        <p>Eq 1: a + s = 95</p>
+                        <p>Eq 2: 12a + 8s = 940</p>
+                        <p>Solve: a = 45, s = 50</p>
                     </div>
                 )
             },
             {
                 id: 10,
                 type: 'word',
-                title: 'Word Problem: Cell Plans',
-                instruction: 'Plan A: $30 + $5/GB. Plan B: $20 + $7/GB. Find GB where cost is equal.',
+                title: 'Cell Phone Plans',
+                instruction: 'Plan A: $30 + $5/GB. Plan B: $20 + $7/GB. Find equal cost GB.',
                 inputs: [{ label: 'GB', answer: 5 }],
                 explanation: (
                     <div className="space-y-2">
-                        <p><strong>Set costs equal:</strong></p>
                         <p>30 + 5x = 20 + 7x</p>
-                        <p>Subtract 5x: 30 = 20 + 2x</p>
-                        <p>Subtract 20: 10 = 2x</p>
-                        <p>x = 5 GB</p>
+                        <p>10 = 2x → x = 5</p>
                     </div>
                 )
             },
             {
                 id: 11,
                 type: 'word',
-                title: 'Word Problem: School Play',
-                instruction: 'Adult $10, Child $6. 120 sold, $960 total. Solve.',
-                inputs: [{ label: 'Adult Tickets', answer: 60 }, { label: 'Child Tickets', answer: 60 }],
+                title: 'School Play',
+                instruction: 'Adult $10, Child $6. 120 sold, $960 total.',
+                inputs: [{ label: 'Adult', answer: 60 }, { label: 'Child', answer: 60 }],
                 explanation: (
                     <div className="space-y-2">
-                        <p><strong>System:</strong></p>
-                        <p>1) a + c = 120</p>
-                        <p>2) 10a + 6c = 960</p>
-                        <p><strong>Solve (Elimination):</strong></p>
-                        <p>Multiply top by -6: -6a - 6c = -720</p>
-                        <p>Add to bottom: (-6a - 6c) + (10a + 6c) = -720 + 960</p>
-                        <p>4a = 240 → a = 60</p>
-                        <p>c = 60</p>
+                        <p>10a + 6c = 960 and a + c = 120</p>
+                        <p>Solve: a = 60, c = 60</p>
                     </div>
                 )
             },
             {
                 id: 12,
                 type: 'word',
-                title: 'Word Problem: Geometry',
-                instruction: 'Perimeter 56. Length is 3 times Width. Find Area.',
+                title: 'Rectangle Geometry',
+                instruction: 'Perimeter 56. Length is 3 times Width.',
                 inputs: [{ label: 'Area', answer: 147 }],
                 explanation: (
                     <div className="space-y-2">
-                        <p><strong>System:</strong></p>
-                        <p>1) 2L + 2W = 56</p>
-                        <p>2) L = 3W</p>
-                        <p><strong>Substitute:</strong></p>
+                        <p>2L + 2W = 56 and L = 3W</p>
                         <p>2(3W) + 2W = 56 → 8W = 56 → W = 7</p>
-                        <p>L = 3(7) = 21</p>
-                        <p><strong>Area:</strong></p>
-                        <p>Area = L × W = 21 × 7 = 147</p>
+                        <p>L = 21. Area = 147.</p>
                     </div>
                 )
             },
             {
                 id: 13,
                 type: 'graphing',
-                title: 'Systems of Inequalities',
-                instruction: 'Graph the boundary lines for: y >= -x + 2 and y < 2x - 1',
+                title: 'Inequalities',
+                instruction: 'Graph lines for: y >= -x + 2 and y < 2x - 1',
                 equations: ['y >= -x + 2', 'y < 2x - 1'],
-                targetLines: [
-                    { m: -1, b: 2 },
-                    { m: 2, b: -1 }
-                ],
+                targetLines: [{ m: -1, b: 2 }, { m: 2, b: -1 }],
                 explanation: (
                     <div className="space-y-2">
-                        <p><strong>Line 1: y = -x + 2</strong></p>
-                        <p>Solid line (due to ≥). Shade ABOVE.</p>
-                        <p><strong>Line 2: y = 2x - 1</strong></p>
-                        <p>Dashed line (due to &lt;). Shade BELOW.</p>
-                        <p><strong>Solution Region:</strong></p>
-                        <p>The overlap is the region to the right, between the two lines.</p>
+                        <p>Line 1: y = -x + 2 (Solid, Shade Up)</p>
+                        <p>Line 2: y = 2x - 1 (Dashed, Shade Down)</p>
+                    </div>
+                )
+            },
+            // --- NEW QUESTIONS (14-30) ---
+            {
+                id: 14,
+                type: 'substitution',
+                title: 'Substitution Practice',
+                instruction: 'Solve the system.',
+                equations: ['y = 4x', 'x + y = 5'],
+                inputs: [{ label: 'x', answer: 1 }, { label: 'y', answer: 4 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>Sub y=4x into x+y=5: x + 4x = 5</p>
+                        <p>5x = 5 → x = 1</p>
+                        <p>y = 4(1) = 4</p>
+                        <p className="font-bold text-green-700">Solution: (1, 4)</p>
+                    </div>
+                )
+            },
+            {
+                id: 15,
+                type: 'substitution',
+                title: 'Substitution with Negative',
+                instruction: 'Solve the system.',
+                equations: ['x = -2y', 'x - y = 9'],
+                inputs: [{ label: 'x', answer: 6 }, { label: 'y', answer: -3 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>Sub x=-2y into x-y=9: (-2y) - y = 9</p>
+                        <p>-3y = 9 → y = -3</p>
+                        <p>x = -2(-3) = 6</p>
+                        <p className="font-bold text-green-700">Solution: (6, -3)</p>
+                    </div>
+                )
+            },
+            // CHANGED (Was No Solution)
+            {
+                id: 16,
+                type: 'substitution',
+                title: 'Substitution Practice',
+                instruction: 'Solve the system.',
+                equations: ['y = 2x', 'y = x + 3'],
+                inputs: [{ label: 'x', answer: 3 }, { label: 'y', answer: 6 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>Set equal: 2x = x + 3</p>
+                        <p>Subtract x: x = 3</p>
+                        <p>y = 2(3) = 6</p>
+                        <p className="font-bold text-green-700">Solution: (3, 6)</p>
+                    </div>
+                )
+            },
+            {
+                id: 17,
+                type: 'elimination',
+                title: 'Basic Elimination',
+                instruction: 'Solve the system.',
+                equations: ['x + y = 10', 'x - y = 4'],
+                inputs: [{ label: 'x', answer: 7 }, { label: 'y', answer: 3 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>Add equations: (x+x) + (y-y) = 10+4</p>
+                        <p>2x = 14 → x = 7</p>
+                        <p>7 + y = 10 → y = 3</p>
+                    </div>
+                )
+            },
+            {
+                id: 18,
+                type: 'elimination',
+                title: 'Elimination with Multipliers',
+                instruction: 'Solve using elimination.',
+                equations: ['2x + y = 12', '-2x + 3y = 4'],
+                inputs: [{ label: 'x', answer: 4 }, { label: 'y', answer: 4 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>Add equations: (2x - 2x) + (y + 3y) = 12 + 4</p>
+                        <p>4y = 16 → y = 4</p>
+                        <p>2x + 4 = 12 → 2x = 8 → x = 4</p>
+                    </div>
+                )
+            },
+            {
+                id: 19,
+                type: 'elimination',
+                title: 'Elimination Practice',
+                instruction: 'Solve the system.',
+                equations: ['3x + 4y = 10', '2x - 4y = 0'],
+                inputs: [{ label: 'x', answer: 2 }, { label: 'y', answer: 1 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>Add equations: 5x = 10 → x = 2</p>
+                        <p>2(2) - 4y = 0 → 4 = 4y → y = 1</p>
+                    </div>
+                )
+            },
+            {
+                id: 20,
+                type: 'graphing',
+                title: 'Graphing Intersection',
+                instruction: 'Graph both lines.',
+                equations: ['y = x', 'y = -x + 4'],
+                targetLines: [{ m: 1, b: 0 }, { m: -1, b: 4 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>Line 1: y = x (Starts at 0, slope 1)</p>
+                        <p>Line 2: y = -x + 4 (Starts at 4, slope -1)</p>
+                        <p>Intersect at (2, 2)</p>
+                    </div>
+                )
+            },
+            // CHANGED (Was No Solution)
+            {
+                id: 21,
+                type: 'graphing',
+                title: 'Graphing Practice',
+                instruction: 'Graph both lines.',
+                equations: ['y = 2x - 3', 'y = -x + 3'],
+                targetLines: [{ m: 2, b: -3 }, { m: -1, b: 3 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>Line 1: y = 2x - 3 (Start -3, Up 2 Right 1).</p>
+                        <p>Line 2: y = -x + 3 (Start 3, Down 1 Right 1).</p>
+                        <p>Intersect at (2, 1).</p>
+                        <p className="font-bold text-green-700">Solution: (2, 1)</p>
+                    </div>
+                )
+            },
+            {
+                id: 22,
+                type: 'graphing',
+                title: 'Horizontal & Vertical Lines',
+                instruction: 'Graph the lines x = 3 and y = 2.',
+                equations: ['x = 3', 'y = 2'],
+                targetLines: [{ isVertical: true, x: 3 }, { m: 0, b: 2 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>x = 3 is a vertical line at x=3.</p>
+                        <p>y = 2 is a horizontal line at y=2.</p>
+                        <p>They intersect at (3, 2).</p>
+                    </div>
+                )
+            },
+            {
+                id: 23,
+                type: 'graphing',
+                title: 'Graphing Practice',
+                instruction: 'Graph both lines.',
+                equations: ['y = 2x', 'y = x - 1'],
+                targetLines: [{ m: 2, b: 0 }, { m: 1, b: -1 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>Line 1: y = 2x (Origin, up 2 right 1)</p>
+                        <p>Line 2: y = x - 1</p>
+                        <p>Intersect at (-1, -2)</p>
+                    </div>
+                )
+            },
+            {
+                id: 24,
+                type: 'word',
+                title: 'Number Problem',
+                instruction: 'The sum of two numbers is 25. Their difference is 5. Find the numbers.',
+                inputs: [{ label: 'Larger Number', answer: 15 }, { label: 'Smaller Number', answer: 10 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>x + y = 25</p>
+                        <p>x - y = 5</p>
+                        <p>Add: 2x = 30 → x = 15. y = 10.</p>
+                    </div>
+                )
+            },
+            {
+                id: 25,
+                type: 'word',
+                title: 'Concession Stand',
+                instruction: '3 sodas and 2 popcorns cost $19. 2 sodas and 2 popcorns cost $16. Find cost of soda.',
+                inputs: [{ label: 'Soda Cost ($)', answer: 3 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>3s + 2p = 19</p>
+                        <p>2s + 2p = 16</p>
+                        <p>Subtract: s = 3</p>
+                        <p>Soda costs $3.</p>
+                    </div>
+                )
+            },
+            {
+                id: 26,
+                type: 'word',
+                title: 'Perimeter Problem',
+                instruction: 'Rectangle perimeter is 20. Length is 2 more than Width. Find Area.',
+                inputs: [{ label: 'Area', answer: 24 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>2L + 2W = 20 → L + W = 10</p>
+                        <p>L = W + 2</p>
+                        <p>(W+2) + W = 10 → 2W = 8 → W = 4, L = 6</p>
+                        <p>Area = 6 × 4 = 24</p>
+                    </div>
+                )
+            },
+            {
+                id: 27,
+                type: 'word',
+                title: 'Coin Problem',
+                instruction: '10 coins (Quarters and Dimes). Total value $1.90. How many Quarters?',
+                inputs: [{ label: 'Quarters', answer: 6 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>Q + D = 10 → D = 10 - Q</p>
+                        <p>0.25Q + 0.10D = 1.90</p>
+                        <p>0.25Q + 0.10(10 - Q) = 1.90</p>
+                        <p>0.25Q + 1 - 0.10Q = 1.90</p>
+                        <p>0.15Q = 0.90 → Q = 6</p>
+                    </div>
+                )
+            },
+            {
+                id: 28,
+                type: 'graphing',
+                title: 'Inequalities Region',
+                instruction: 'Graph lines for: y > x - 2 and y < -x + 2',
+                equations: ['y > x - 2', 'y < -x + 2'],
+                targetLines: [{ m: 1, b: -2 }, { m: -1, b: 2 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>Line 1: y = x - 2 (Dashed, Shade Above)</p>
+                        <p>Line 2: y = -x + 2 (Dashed, Shade Below)</p>
+                        <p>Solution is the region between lines.</p>
+                    </div>
+                )
+            },
+            {
+                id: 29,
+                type: 'graphing',
+                title: 'System with Vertical Bound',
+                instruction: 'Graph lines for: y = 3 and x = 2.',
+                equations: ['y >= 3', 'x < 2'],
+                targetLines: [{ m: 0, b: 3 }, { isVertical: true, x: 2 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>y = 3 is Horizontal.</p>
+                        <p>x = 2 is Vertical.</p>
+                        <p>Region: Above y=3 and Left of x=2.</p>
+                    </div>
+                )
+            },
+            // CHANGED (Was Infinite)
+            {
+                id: 30,
+                type: 'mixed',
+                title: 'Mixed Practice',
+                instruction: 'Solve the system.',
+                equations: ['2x + y = 8', 'y = x + 2'],
+                inputs: [{ label: 'x', answer: 2 }, { label: 'y', answer: 4 }],
+                explanation: (
+                    <div className="space-y-2">
+                        <p>Sub y=x+2 into 2x+y=8: 2x + (x+2) = 8</p>
+                        <p>3x = 6 → x = 2</p>
+                        <p>y = 2 + 2 = 4</p>
+                        <p className="font-bold text-green-700">Solution: (2, 4)</p>
                     </div>
                 )
             }
@@ -352,25 +545,22 @@
             const canvasRef = useRef(null);
             const [points, setPoints] = useState([]);
             
-            // Reset when trigger changes
             useEffect(() => {
                 setPoints([]);
             }, [resetTrigger]);
 
-            const gridSize = 20; // pixels per unit
+            const gridSize = 20; 
             const width = 400;
             const height = 400;
             const centerX = width / 2;
             const centerY = height / 2;
 
-            // Convert screen coords to grid coords
             const toGrid = (px, py) => {
                 const x = Math.round((px - centerX) / gridSize);
                 const y = Math.round(-(py - centerY) / gridSize);
                 return { x, y };
             };
 
-            // Convert grid coords to screen coords
             const toScreen = (gx, gy) => {
                 return {
                     x: centerX + gx * gridSize,
@@ -379,11 +569,9 @@
             };
 
             const draw = (ctx) => {
-                // Background
                 ctx.fillStyle = '#f9fafb';
                 ctx.fillRect(0, 0, width, height);
 
-                // Grid lines
                 ctx.beginPath();
                 ctx.strokeStyle = '#e5e7eb';
                 ctx.lineWidth = 1;
@@ -393,7 +581,6 @@
                 }
                 ctx.stroke();
 
-                // Axes
                 ctx.beginPath();
                 ctx.strokeStyle = '#374151';
                 ctx.lineWidth = 2;
@@ -401,24 +588,18 @@
                 ctx.moveTo(0, centerY); ctx.lineTo(width, centerY);
                 ctx.stroke();
 
-                // Draw user points
                 points.forEach((p, idx) => {
                     const screen = toScreen(p.x, p.y);
                     ctx.beginPath();
-                    // First 2 points = Line 1 (Blue), Next 2 = Line 2 (Red)
                     ctx.fillStyle = idx < 2 ? '#2563eb' : '#dc2626';
                     ctx.arc(screen.x, screen.y, 4, 0, Math.PI * 2);
                     ctx.fill();
                 });
 
-                // Draw lines if enough points
                 const drawLineFromPoints = (p1, p2, color) => {
                     if (!p1 || !p2) return;
                     
                     const s1 = toScreen(p1.x, p1.y);
-                    const s2 = toScreen(p2.x, p2.y);
-                    
-                    // Calculate extended line for drawing to edge
                     const slope = (p2.y - p1.y) / (p2.x - p1.x);
                     
                     ctx.beginPath();
@@ -426,22 +607,16 @@
                     ctx.lineWidth = 2;
 
                     if (!isFinite(slope)) {
-                        // Vertical line
                         ctx.moveTo(s1.x, 0);
                         ctx.lineTo(s1.x, height);
                     } else {
-                        // y = mx + b in grid coords
                         const b = p1.y - slope * p1.x;
-                        
-                        // Find left (x=-10) and right (x=10) points
-                        const leftX = -10; 
+                        const leftX = -15; 
                         const leftY = slope * leftX + b;
-                        const rightX = 10;
+                        const rightX = 15;
                         const rightY = slope * rightX + b;
-
                         const start = toScreen(leftX, leftY);
                         const end = toScreen(rightX, rightY);
-                        
                         ctx.moveTo(start.x, start.y);
                         ctx.lineTo(end.x, end.y);
                     }
@@ -451,24 +626,15 @@
                 if (points.length >= 2) drawLineFromPoints(points[0], points[1], '#2563eb');
                 if (points.length >= 4) drawLineFromPoints(points[2], points[3], '#dc2626');
 
-                // Callback to parent with line data
                 if (!isReadOnly && onLinesUpdate) {
-                    // Calculate math slopes and intercepts for parent validation
                     const lines = [];
-                    if (points.length >= 2) {
-                        const p1 = points[0];
-                        const p2 = points[1];
-                        const m = (p2.y - p1.y) / (p2.x - p1.x);
-                        const b = p1.y - m * p1.x;
-                        lines.push({ m, b, isVertical: !isFinite(m), xInt: p1.x });
-                    }
-                    if (points.length >= 4) {
-                        const p3 = points[2];
-                        const p4 = points[3];
-                        const m = (p4.y - p3.y) / (p4.x - p3.x);
-                        const b = p3.y - m * p3.x;
-                        lines.push({ m, b, isVertical: !isFinite(m), xInt: p3.x });
-                    }
+                    const processLine = (pA, pB) => {
+                         const m = (pB.y - pA.y) / (pB.x - pA.x);
+                         const b = pA.y - m * pA.x;
+                         return { m, b, isVertical: !isFinite(m), xInt: pA.x };
+                    };
+                    if (points.length >= 2) lines.push(processLine(points[0], points[1]));
+                    if (points.length >= 4) lines.push(processLine(points[2], points[3]));
                     onLinesUpdate(lines);
                 }
             };
@@ -498,11 +664,7 @@
                         className="border border-gray-300 rounded shadow-sm cursor-crosshair bg-white"
                     />
                     <div className="mt-2 text-sm text-gray-500">
-                        {points.length === 0 && "Click to plot first point for Line 1"}
-                        {points.length === 1 && "Click second point for Line 1"}
-                        {points.length === 2 && "Click first point for Line 2"}
-                        {points.length === 3 && "Click second point for Line 2"}
-                        {points.length === 4 && "Graph complete. Submit answer."}
+                        {points.length < 4 ? "Click to plot points" : "Graph complete. Submit answer."}
                     </div>
                 </div>
             );
@@ -531,16 +693,14 @@
                 let correct = true;
 
                 if (question.type === 'graphing') {
-                    // Validate Graph
                     if (graphLines.length < 2) {
                         correct = false;
                     } else {
-                        // Compare user lines to target lines
                         const match = (u, t) => {
-                            // Handle vertical lines
-                            if (u.isVertical && Math.abs(t.m) > 1000) return isClose(u.xInt, -t.b/t.m); 
-                            // Standard lines
-                            return isClose(u.m, t.m) && isClose(u.b, t.b);
+                            if (t.isVertical) {
+                                return u.isVertical && isClose(u.xInt, t.x);
+                            }
+                            return !u.isVertical && isClose(u.m, t.m) && isClose(u.b, t.b);
                         };
                         
                         const t1 = question.targetLines[0];
@@ -554,7 +714,6 @@
                         correct = perm1 || perm2;
                     }
                 } else {
-                    // Validate Text/Numeric inputs
                     question.inputs.forEach((input, idx) => {
                         const userVal = userInputs[idx];
                         if (input.isText) {
@@ -604,10 +763,7 @@
                             <div className="w-full bg-gray-200 rounded-full h-2.5 mb-6">
                                 <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `${(score / QUESTIONS.length) * 100}%` }}></div>
                             </div>
-                            <button 
-                                onClick={resetTest}
-                                className="flex items-center justify-center gap-2 w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
-                            >
+                            <button onClick={resetTest} className="flex items-center justify-center gap-2 w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition">
                                 <RefreshCw size={18} /> Retry Test
                             </button>
                         </div>
@@ -618,19 +774,16 @@
             return (
                 <div className="min-h-screen bg-gray-50 p-4 md:p-8 font-sans">
                     <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg overflow-hidden">
-                        
-                        {/* Header */}
                         <div className="bg-blue-600 p-6 text-white flex justify-between items-center">
                             <div>
                                 <h1 className="text-xl md:text-2xl font-bold flex items-center gap-2">
-                                    <Calculator size={24} /> Systems of Equations Test
+                                    <Calculator size={24} /> Systems Test
                                 </h1>
                                 <p className="text-blue-100 text-sm mt-1">Question {currentIdx + 1} of {QUESTIONS.length}</p>
                             </div>
                             <div className="text-2xl font-bold opacity-80">{score} pts</div>
                         </div>
 
-                        {/* Question Area */}
                         <div className="p-6 md:p-8">
                             <div className="mb-6">
                                 <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded uppercase tracking-wide">
@@ -639,7 +792,6 @@
                                 <h2 className="text-xl font-bold text-gray-800 mt-2">{question.title}</h2>
                                 <p className="text-gray-600 mt-2">{question.instruction}</p>
                                 
-                                {/* Equations Display */}
                                 <div className="mt-4 p-4 bg-gray-100 rounded-lg border border-gray-200 inline-block pr-12">
                                     {question.equations && question.equations.map((eq, i) => (
                                         <div key={i} className="font-mono text-lg text-gray-800 mb-1 last:mb-0">
@@ -649,7 +801,6 @@
                                 </div>
                             </div>
 
-                            {/* Input Area */}
                             {!showExplanation && (
                                 <div className="space-y-6">
                                     {question.type === 'graphing' ? (
@@ -659,10 +810,7 @@
                                                 resetTrigger={graphResetCounter}
                                             />
                                             <div className="flex justify-center">
-                                                <button 
-                                                    onClick={() => setGraphResetCounter(c => c + 1)}
-                                                    className="text-sm text-gray-500 hover:text-red-500 underline"
-                                                >
+                                                <button onClick={() => setGraphResetCounter(c => c + 1)} className="text-sm text-gray-500 hover:text-red-500 underline">
                                                     Clear Graph
                                                 </button>
                                             </div>
@@ -684,24 +832,16 @@
                                         </div>
                                     )}
 
-                                    <button
-                                        onClick={checkAnswer}
-                                        className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center gap-2 shadow-md mt-4"
-                                    >
+                                    <button onClick={checkAnswer} className="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center gap-2 shadow-md mt-4">
                                         Submit Answer
                                     </button>
                                 </div>
                             )}
 
-                            {/* Feedback & Explanation */}
                             {showExplanation && (
                                 <div className={`mt-6 p-6 rounded-lg border ${isCorrect ? 'bg-green-50 border-green-200' : 'bg-red-50 border-red-200'}`}>
                                     <div className="flex items-center gap-3 mb-4">
-                                        {isCorrect ? (
-                                            <CheckCircle className="text-green-600 w-8 h-8" />
-                                        ) : (
-                                            <XCircle className="text-red-600 w-8 h-8" />
-                                        )}
+                                        {isCorrect ? <CheckCircle className="text-green-600 w-8 h-8" /> : <XCircle className="text-red-600 w-8 h-8" />}
                                         <h3 className={`text-xl font-bold ${isCorrect ? 'text-green-800' : 'text-red-800'}`}>
                                             {isCorrect ? 'Correct!' : 'Incorrect'}
                                         </h3>
@@ -715,16 +855,12 @@
                                     </div>
 
                                     <div className="mt-6 flex justify-end">
-                                        <button
-                                            onClick={nextQuestion}
-                                            className="bg-gray-800 text-white py-2 px-6 rounded hover:bg-gray-900 transition flex items-center gap-2"
-                                        >
+                                        <button onClick={nextQuestion} className="bg-gray-800 text-white py-2 px-6 rounded hover:bg-gray-900 transition flex items-center gap-2">
                                             {currentIdx === QUESTIONS.length - 1 ? 'Finish Test' : 'Next Question'} <ArrowRight size={18} />
                                         </button>
                                     </div>
                                 </div>
                             )}
-
                         </div>
                     </div>
                 </div>
